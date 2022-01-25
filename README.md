@@ -1,8 +1,8 @@
 # game_of_live
-template for the classic Game of Live  for TDD practice
+template for the classic Game of Live  for TestDrivenDevelopment TDD practice
 
-## Rules:
-- Implement a `de.bas.game_of_life.GameOfLive.java` class, according to these "Game of Live"- [Rules](https://github.com/garora/TDD-Katas/blob/main/KatasReadme.md)
+## Implementation Rules:
+- Implement a `de.bas.game_of_life.GameOfLive.java` class, according to these "Game of Live"- rules [here](https://github.com/garora/TDD-Katas/blob/main/KatasReadme.md)
 - Start with `de.bas.game_of_life.GameOfLiveTest.java` unit test
 - brake down all the functionality you will need into small chunks i.e. methods not longer then 9-11 lines for each method, so that they can be easily unit-tested.
 - write **all** the tests **before** the implementation. 
