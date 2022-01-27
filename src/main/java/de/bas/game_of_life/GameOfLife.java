@@ -1,13 +1,28 @@
 package de.bas.game_of_life;
 
+import java.util.Arrays;
+
 import static de.bas.game_of_life.MatrixPaneConverter.DEAD_CELL;
 import static de.bas.game_of_life.MatrixPaneConverter.LIVING_CELL;
 
 public class GameOfLife {
     char[][] board;
 
+
     public GameOfLife(char[][] board) {
         this.board = board;
+    }
+
+    public GameOfLife(char[][] board, boolean randomInit) {
+        this.board = Arrays.stream(board).map(char[]::clone).toArray((char[][]::new));
+        this.board[0][0] = LIVING_CELL;
+        if(randomInit) {
+            for (int row = 0; row < board[0].length; row++) {
+                for (int col = 0; col < board.length; col++) {
+
+                }
+            }
+        }
     }
 
     // return no. of alive neighbours of char in position x,y
