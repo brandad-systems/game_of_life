@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GameOfLifeTest {
 
@@ -122,20 +122,58 @@ class GameOfLifeTest {
     }
 
     @Test
-    void createFilledBoard_with_given_length_and_width()
-    {
-        char[][] board = new char[10][12];
-        var gameOfLife= new GameOfLife(board,true);
-        assertThat(gameOfLife.board.length).isEqualTo(10);
-        assertThat(gameOfLife.board[0].length).isEqualTo(12);
-        assertThat(Arrays.deepEquals(board,gameOfLife.board)).isFalse();
-        for(int row = 0; row < gameOfLife.board[0].length; row++){
-            for(int col = 0; col < gameOfLife.board.length; col++){
-                assertTrue(gameOfLife.board[col][row] == LIVING_CELL || gameOfLife.board[col][row] == DEAD_CELL);
-            }
-        }
+    void calculateNewGeneration() {
+        char[][] board = new char[][]{
+                {DEAD_CELL, DEAD_CELL, LIVING_CELL},  // x=0;y=0;    x=1;y=0
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL},
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL}};
+        char[][] expected = new char[][]{
+                {DEAD_CELL, LIVING_CELL, DEAD_CELL},  // x=0;y=0;    x=1;y=0
+                {DEAD_CELL, DEAD_CELL, LIVING_CELL},
+                {DEAD_CELL, DEAD_CELL, DEAD_CELL}};
+        var gameOfLife = new GameOfLife(board, false);
+        gameOfLife.calculateNewGeneration();
+        assertThat(gameOfLife.board).isDeepEqualTo(expected);
     }
 
+    @Nested
+    @DisplayName("Constructor - Tests")
+    class ConstructorTests {
+        @Test
+        void createFilledBoard_with_given_length_and_width() {
+            char[][] board = new char[10][12];
+            var gameOfLife = new GameOfLife(board, true);
+            assertThat(gameOfLife.board.length).isEqualTo(board.length);
+            assertThat(gameOfLife.board[0].length).isEqualTo(board[0].length);
+            assertThat(Arrays.deepEquals(board, gameOfLife.board)).isFalse();
+            for (int row = 0; row < gameOfLife.board[0].length; row++) {
+                for (int col = 0; col < gameOfLife.board.length; col++) {
+                    assertTrue(gameOfLife.board[col][row] == LIVING_CELL || gameOfLife.board[col][row] == DEAD_CELL);
+                }
+            }
+        }
+
+        @Test
+        void use_given_board_with_given_length_and_width() {
+            char[][] board = new char[][]{
+                    {DEAD_CELL, DEAD_CELL, LIVING_CELL},  // x=0;y=0;    x=1;y=0
+                    {LIVING_CELL, DEAD_CELL, LIVING_CELL},
+                    {LIVING_CELL, DEAD_CELL, LIVING_CELL}};
+            var gameOfLife = new GameOfLife(board, false);
+            assertThat(board).isDeepEqualTo(gameOfLife.board);
+        }
+
+
+        @Test
+        void shouldThrowIllegalArgumentException_when_BoardIsFilledWithInvalidCharacters() {
+            char[][] board = new char[][]{
+                    {'X', 'Ä'},  // x=0;y=0;    x=1;y=0
+                    {'Z', 'P'} // x=0;y=1;    x=1;y=1
+            };
+
+            assertThrows(IllegalArgumentException.class, () -> new GameOfLife(board));
+        }
+    }
 
 
     // ***** ***** ***** ***** *****
@@ -145,8 +183,7 @@ class GameOfLifeTest {
     class AliveTests {
         @Test
         void when_Board_IS_NULL() {
-            var gameOfLife = new GameOfLife(null);
-            assertThat(gameOfLife.isAlive(0, 0)).isFalse();
+            assertThrows(IllegalArgumentException.class, () -> new GameOfLife(null));
         }
 
         @Test
@@ -167,8 +204,7 @@ class GameOfLifeTest {
                     {'A', 'B'},  // x=0;y=0;    x=1;y=0
                     {'C', 'D'} // x=0;y=1;    x=1;y=1
             };
-            var gameOfLife = new GameOfLife(board);
-            assertThat(gameOfLife.isAlive(0, 0)).isFalse();
+            assertThrows(IllegalArgumentException.class, () -> new GameOfLife(board));
         }
     }
 

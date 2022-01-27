@@ -1,6 +1,7 @@
 package de.bas.game_of_life;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import static de.bas.game_of_life.MatrixPaneConverter.DEAD_CELL;
 import static de.bas.game_of_life.MatrixPaneConverter.LIVING_CELL;
@@ -8,21 +9,59 @@ import static de.bas.game_of_life.MatrixPaneConverter.LIVING_CELL;
 public class GameOfLife {
     char[][] board;
 
+    private boolean isValid(char[][] board, boolean randomInit){
+        if (board == null){
+            return false;
+        }
 
-    public GameOfLife(char[][] board) {
-        this.board = board;
-    }
-
-    public GameOfLife(char[][] board, boolean randomInit) {
-        this.board = Arrays.stream(board).map(char[]::clone).toArray((char[][]::new));
-        this.board[0][0] = LIVING_CELL;
-        if(randomInit) {
-            for (int row = 0; row < board[0].length; row++) {
-                for (int col = 0; col < board.length; col++) {
-
+        if(!randomInit) {
+            for (int x = 0; x < board[0].length; x++) {
+                for (int y = 0; y < board.length; y++) {
+                    if (board[y][x] != LIVING_CELL && board[y][x] != DEAD_CELL) {
+                        return false;
+                    }
                 }
             }
         }
+        return true;
+    }
+
+    public GameOfLife(char[][] board) {
+        if(!isValid(board, false)){
+            throw new IllegalArgumentException();
+        }
+        this.board = Arrays.stream(board)
+                .map(char[]::clone)
+                .toArray((char[][]::new));
+    }
+
+    public GameOfLife(char[][] board, boolean randomInit) {
+        if(!isValid(board, randomInit)){
+            throw new IllegalArgumentException();
+        }
+        this.board = Arrays.stream(board)
+                .map(char[]::clone)
+                .toArray((char[][]::new));
+
+
+        if(randomInit) {
+            var random = new Random();
+            for (int x = 0; x < board[0].length; x++) {
+                for (int y = 0; y < board.length; y++) {
+                    this.board[y][x] = random.nextBoolean() ? LIVING_CELL : DEAD_CELL;
+                }
+            }
+        }
+    }
+
+    void calculateNewGeneration(){
+        var newBoard = new char[board.length][board[0].length];
+        for (int x = 0; x < board[0].length; x++) {
+            for (int y = 0; y < board.length; y++) {
+                newBoard[y][x] = calculateNextGenerationCellState(x, y);
+            }
+        }
+        board = newBoard;
     }
 
     // return no. of alive neighbours of char in position x,y
