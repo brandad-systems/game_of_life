@@ -23,10 +23,9 @@ public class GameOfLive implements MatrixSource {
 ```
 with these constaints:
 - if `randomInit` is false , then `array` given is expected to  be initialized with  
-  - `MatrixPaneConverter.LIVING_CELL` , which is the `char` `'■'` or
-  - `MatrixPaneConverter.DEAD_CELL` , which is the `space` `char` `' '`;
-
-**before** calling the constuctor of GameOfLive
+  - `MatrixPaneConverter.LIVING_CELL` , which is the `char` `'■'`
+  - or `MatrixPaneConverter.DEAD_CELL` , which is the `space` `char` `' '`; 
+  - and **before** calling the constuctor of GameOfLive
 - or, if `randomInit` is `true`, the array need not be initialized but only allocated with `new`, before calling the Constructor of GameOfLive. Then the Constructor should replace the content by random with '■' or ' ' for each element of the `array`.
 
 the goal is, not to need to fix anything (apart from the Constructor and the initialization ) in `de.bas.game_of_life.GameOfLive.java` after its integrated with the
