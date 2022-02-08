@@ -2,6 +2,8 @@ package de.bas.tdd_helpers;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import java.util.logging.Logger;
+
 
 public class MatrixPaneConverter {
 
@@ -13,6 +15,7 @@ public class MatrixPaneConverter {
     //and these two definitions are for the Langton's Ant:
     public static char BLACK_CELL = '■';
     public static char WHITE_CELL = ' ';
+    // the ant itself shall be "invisible" on the array
 
     public MatrixPaneConverter(MatrixSource matrixSource) {
         this.matrixSource = matrixSource;

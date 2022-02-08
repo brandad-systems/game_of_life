@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class MatrixSequenceViewer extends Application {
     Scene scene;
     long frameCounter=0;
@@ -14,10 +16,15 @@ public class MatrixSequenceViewer extends Application {
     @Override
     public void start(Stage stage)  {
 
-        char[][] startArray = new char[60][60];
+        char[][] startArray = new char[8][8];
 
         int sizex = startArray[0].length;
         int sizey = startArray.length;
+        for (int y = 0; y < startArray.length; y++) {
+            for (int x = 0; x < startArray[0].length; x++) {
+                startArray[y][x] = ' ';
+            }
+        }
         MatrixSource theGame = new ExampleMatrixSource(startArray);
         // to use your solution for 'game of live' or 'Langton's Ant'
         //MatrixSource theGame = new GameOfLive(startArray,true);
@@ -27,6 +34,7 @@ public class MatrixSequenceViewer extends Application {
         stage.setTitle("Hello!");
         Pane pane = paneSource.getNextPane();
         scene = new Scene(pane ,sizex*6.1,sizey*6.6);
+        //scene = new Scene(pane ,sizex*10,sizey*10);
         AnimationTimer timer = new MyTimer();
         timer.start();
         stage.setScene(scene);
@@ -36,11 +44,12 @@ public class MatrixSequenceViewer extends Application {
         @Override
         public void handle(long now) {
             //change pane every 1/10 second
-            if ( now > lastTimeStamp + 1000*1000*1000){
+            if ( now > lastTimeStamp + 1000*1000*100){
                 System.out.println("framecounter= " + frameCounter );
                 lastTimeStamp =   now ;
                 frameCounter++;
-                scene.setRoot(paneSource.getNextPane());
+                Pane nextP = paneSource.getNextPane();
+                scene.setRoot(nextP);
             }
         }
     }
