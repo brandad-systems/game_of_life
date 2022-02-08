@@ -1,4 +1,4 @@
-package de.bas.game_of_life;
+package de.bas.tdd_helpers;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -6,8 +6,13 @@ import javafx.scene.text.Text;
 public class MatrixPaneConverter {
 
     private final MatrixSource matrixSource;
-    static char LIVING_CELL = '■';
-    static char DEAD_CELL = ' ';
+    //these two definitions are for the Game of Live
+    public static char LIVING_CELL = '■';
+    public static char DEAD_CELL = ' ';
+
+    //and these two definitions are for the Langton's Ant:
+    public static char BLACK_CELL = '■';
+    public static char WHITE_CELL = ' ';
 
     public MatrixPaneConverter(MatrixSource matrixSource) {
         this.matrixSource = matrixSource;

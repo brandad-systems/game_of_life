@@ -1,4 +1,4 @@
-package de.bas.game_of_life;
+package de.bas.tdd_helpers;
 
 public interface MatrixSource {
     int getSizeX();

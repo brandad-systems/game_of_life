@@ -5,4 +5,6 @@ module de.bas.game_of_life {
 
     opens de.bas.game_of_life to javafx.fxml;
     exports de.bas.game_of_life;
+    exports de.bas.tdd_helpers;
+    opens de.bas.tdd_helpers to javafx.fxml;
 }

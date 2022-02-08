@@ -3,8 +3,8 @@ package de.bas.game_of_life;
 import java.util.Arrays;
 import java.util.Random;
 
-import static de.bas.game_of_life.MatrixPaneConverter.DEAD_CELL;
-import static de.bas.game_of_life.MatrixPaneConverter.LIVING_CELL;
+import static de.bas.tdd_helpers.MatrixPaneConverter.DEAD_CELL;
+import static de.bas.tdd_helpers.MatrixPaneConverter.LIVING_CELL;
 
 public class GameOfLife {
     char[][] board;

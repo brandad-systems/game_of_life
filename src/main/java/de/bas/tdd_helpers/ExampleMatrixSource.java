@@ -1,4 +1,4 @@
-package de.bas.game_of_life;
+package de.bas.tdd_helpers;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -12,6 +12,7 @@ public class ExampleMatrixSource implements MatrixSource {
     }
 
     public char[][] getNextMatrix() {
+        // calculate the next matrix, this example just plots random noise, you need to implement the game instead
         array = new char[array.length][array[0].length];
         for (int y = 0; y < array.length; y++) {
             for (int x = 0; x < array[0].length; x++) {

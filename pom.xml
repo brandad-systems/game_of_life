@@ -79,7 +79,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>de.bas.game_of_life/de.bas.game_of_life.MatrixSequenceViewer</mainClass>
+                            <mainClass>de.bas.game_of_life/de.bas.tdd_helpers.MatrixSequenceViewer</mainClass>
                         </configuration>
                     </execution>
                 </executions>

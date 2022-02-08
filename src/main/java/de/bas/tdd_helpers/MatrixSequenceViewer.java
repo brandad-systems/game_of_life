@@ -1,4 +1,4 @@
-package de.bas.game_of_life;
+package de.bas.tdd_helpers;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -18,10 +18,12 @@ public class MatrixSequenceViewer extends Application {
 
         int sizex = startArray[0].length;
         int sizey = startArray.length;
-        MatrixSource gameOfLive = new ExampleMatrixSource(startArray);
-        //MatrixSource gameOfLive = new GameOfLive(startArray,true);
+        MatrixSource theGame = new ExampleMatrixSource(startArray);
+        // to use your solution for 'game of live' or 'Langton's Ant'
+        //MatrixSource theGame = new GameOfLive(startArray,true);
+        //MatrixSource theGame = new LangtonsAnt(startArray,true);
 
-        paneSource = new MatrixPaneConverter(gameOfLive);
+        paneSource = new MatrixPaneConverter(theGame);
         stage.setTitle("Hello!");
         Pane pane = paneSource.getNextPane();
         scene = new Scene(pane ,sizex*6.1,sizey*6.6);
@@ -34,7 +36,7 @@ public class MatrixSequenceViewer extends Application {
         @Override
         public void handle(long now) {
             //change pane every 1/10 second
-            if ( now > lastTimeStamp + 1000*1000*100){
+            if ( now > lastTimeStamp + 1000*1000*1000){
                 System.out.println("framecounter= " + frameCounter );
                 lastTimeStamp =   now ;
                 frameCounter++;
