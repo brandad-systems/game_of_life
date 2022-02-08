@@ -2,12 +2,12 @@ package de.bas.game_of_life;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RandomMatrixSource implements MatrixSource {
+public class ExampleMatrixSource implements MatrixSource {
     boolean toggle = true;
     char[][] array;
 
 
-    public RandomMatrixSource(char[][] array) {
+    public ExampleMatrixSource(char[][] array) {
         this.array = array;
     }
 

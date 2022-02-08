@@ -6,8 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class MatrixSequenceViewer extends Application {
     Scene scene;
     long frameCounter=0;
@@ -20,7 +18,7 @@ public class MatrixSequenceViewer extends Application {
 
         int sizex = startArray[0].length;
         int sizey = startArray.length;
-        MatrixSource gameOfLive = new RandomMatrixSource(startArray);
+        MatrixSource gameOfLive = new ExampleMatrixSource(startArray);
         //MatrixSource gameOfLive = new GameOfLive(startArray,true);
 
         paneSource = new MatrixPaneConverter(gameOfLive);
