@@ -50,7 +50,10 @@ Use 2 of the 4 statics in `MatrixPaneConverter` (`MatrixPaneConverter.LIVING_CEL
 Finaly just uncomment line 23 or 24 in `MatrixSequenceViewer` and comment in line 21 instead.
 then run `MatrixSequenceViewer`
 
-## Example arrays for "Langton's Ant":
+## Example arrays/steps for "Langton's Ant":
+
+Find the ONE error in  the following example steps! and add another step at the end!
+
 ### example start 6x6 array:  the ant on x=2,y=3, direction=west,  "." is a white field, "■" is a black field
 ```
 ......
@@ -91,10 +94,10 @@ ant position x=3, y=2, direction=east (because ant was on a white field),
 ### next step  (3) according to the rules
 ```
 ......
-..■*..
+..■.*.
 ..■...
 ..■...
 ......
 ......
 ```
-ant position : x=3, y=1 , direktion north (because last field was a black field)
+ant position : x=4, y=1 , direktion north (because last field was a black field)
