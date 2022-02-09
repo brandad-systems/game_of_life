@@ -1,4 +1,4 @@
-# game_of_live
+# game_of_live or Langon's Ant
 template for the classic "Game of Live" or "Langton's Ant"  for TestDrivenDevelopment TDD practice
 
 
