@@ -26,6 +26,9 @@ public class LangtonsAnt {
         return currentDirection;
     }
 
+
+    // rotate the ant based on cell color and current direction
+
     public void setNewDirection(int x, int y) {
 
         var currentCellColor = getCurrentCellColor(x, y);
@@ -42,11 +45,6 @@ public class LangtonsAnt {
     }
 
 
-    // rotate the ant based on cell color and current direction
-
-
-
-
     // flip color of current cell
 
 
@@ -58,16 +56,14 @@ public class LangtonsAnt {
 
     }
 
+    // move the ant based on current direction and next direction
+
     public void moveAnt(int x, int y) {
 
         var currentCellColor = getCurrentCellColor(x,y);
         var currentDirection = getCurrentDirection();
 
     }
-
-    // move the ant based on current direction and next direction
-
-
 
     public enum Direction {
         NORTH(0),
@@ -88,8 +84,6 @@ public class LangtonsAnt {
         public int getValue() {
             return value;
         }
-
-
     }
 
 }
