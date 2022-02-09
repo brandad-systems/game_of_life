@@ -1,4 +1,4 @@
-# game_of_live or Langon's Ant
+# game_of_live or Langton's Ant
 template for the classic "Game of Live" or "Langton's Ant"  for TestDrivenDevelopment TDD practice
 
 
@@ -68,6 +68,7 @@ with the ant on x=2,y=3, direction=west,
 ### next step (1)  according to the rules: 
 - At a white square, turn 90° clockwise, flip the color of the square, move forward one unit
 - At a black square, turn 90° counter-clockwise, flip the color of the square, move forward one unit
+- **NEW**: when ant is facing to the border of the board, it does NOT move forward, but still does flip the color of the square and roteate according to rule 1 and 2
   would be:
 ```
 ......
