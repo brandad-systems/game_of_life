@@ -136,6 +136,96 @@ class GameOfLifeTest {
         assertThat(gameOfLife.board).isDeepEqualTo(expected);
     }
 
+    @Test
+    void getNextMatrixShouldReturnNextTwoGenerationsCorrectly() {
+        char[][] board = new char[][]{
+                {DEAD_CELL, DEAD_CELL, LIVING_CELL},  // x=0;y=0;    x=1;y=0
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL},
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL}};
+        char[][] expected_Gen1 = new char[][]{
+                {DEAD_CELL, LIVING_CELL, DEAD_CELL},  // x=0;y=0;    x=1;y=0
+                {DEAD_CELL, DEAD_CELL, LIVING_CELL},
+                {DEAD_CELL, DEAD_CELL, DEAD_CELL}};
+        char[][] expected_Gen2 = new char[][]{
+                {DEAD_CELL, DEAD_CELL, DEAD_CELL},  // x=0;y=0;    x=1;y=0
+                {DEAD_CELL, DEAD_CELL, DEAD_CELL},
+                {DEAD_CELL, DEAD_CELL, DEAD_CELL}};
+        var gameOfLife = new GameOfLife(board, false);
+        var newGenerationBoard = gameOfLife.getNextMatrix();
+        assertThat(newGenerationBoard).isDeepEqualTo(expected_Gen1);
+        newGenerationBoard = gameOfLife.getNextMatrix();
+        assertThat(newGenerationBoard).isDeepEqualTo(expected_Gen2);
+
+    }
+
+    @Test
+    void getNextMatrixShouldReturnNewGenerationBoard() {
+        char[][] board = new char[][]{
+                {DEAD_CELL, DEAD_CELL, LIVING_CELL},  // x=0;y=0;    x=1;y=0
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL},
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL}};
+        char[][] expected = new char[][]{
+                {DEAD_CELL, LIVING_CELL, DEAD_CELL},  // x=0;y=0;    x=1;y=0
+                {DEAD_CELL, DEAD_CELL, LIVING_CELL},
+                {DEAD_CELL, DEAD_CELL, DEAD_CELL}};
+        var gameOfLife = new GameOfLife(board, false);
+        var newGenerationBoard = gameOfLife.getNextMatrix();
+        assertThat(newGenerationBoard).isDeepEqualTo(expected);
+    }
+
+    @Test
+    void getSizeX_ShouldReturnBoardSizeX_3() {
+        char[][] board = new char[][]{
+                {DEAD_CELL, DEAD_CELL, LIVING_CELL},  // x=0;y=0;    x=1;y=0
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL},
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL}};
+
+        var gameOfLife = new GameOfLife(board, false);
+        assertThat(gameOfLife.getSizeX()).isEqualTo(3);
+    }
+    @Test
+    void getSizeX_ShouldReturnBoardSizeX_0() {
+        char[][] board = new char[][]{{}};
+
+        var gameOfLife = new GameOfLife(board, false);
+        assertThat(gameOfLife.getSizeX()).isEqualTo(0);
+    }
+
+    @Test
+    void getSizeX_ShouldReturnBoardSizeX_5() {
+        char[][] board = new char[][]{
+                {DEAD_CELL, DEAD_CELL, LIVING_CELL, DEAD_CELL, LIVING_CELL},  // x=0;y=0;    x=1;y=0
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL, LIVING_CELL, LIVING_CELL},
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL, DEAD_CELL, DEAD_CELL}};
+
+        var gameOfLife = new GameOfLife(board, false);
+        assertThat(gameOfLife.getSizeX()).isEqualTo(5);
+    }
+
+    @Test
+    void getSizeYShouldReturnBoardSizeY_3() {
+        char[][] board = new char[][]{
+                {DEAD_CELL, DEAD_CELL, LIVING_CELL, DEAD_CELL, LIVING_CELL},  // x=0;y=0;    x=1;y=0
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL, LIVING_CELL, LIVING_CELL},
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL, DEAD_CELL, DEAD_CELL}};
+
+        var gameOfLife = new GameOfLife(board, false);
+        assertThat(gameOfLife.getSizeY()).isEqualTo(3);
+    }
+
+    @Test
+    void getSizeX_ShouldReturnBoardSizeY_5() {
+        char[][] board = new char[][]{
+                {DEAD_CELL, DEAD_CELL, LIVING_CELL},  // x=0;y=0;    x=1;y=0
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL},
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL},
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL},
+                {LIVING_CELL, DEAD_CELL, LIVING_CELL}};
+
+        var gameOfLife = new GameOfLife(board, false);
+        assertThat(gameOfLife.getSizeY()).isEqualTo(5);
+    }
+
     @Nested
     @DisplayName("Constructor - Tests")
     class ConstructorTests {

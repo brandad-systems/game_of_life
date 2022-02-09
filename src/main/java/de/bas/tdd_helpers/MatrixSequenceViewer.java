@@ -1,5 +1,6 @@
 package de.bas.tdd_helpers;
 
+import de.bas.game_of_life.GameOfLife;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ public class MatrixSequenceViewer extends Application {
     @Override
     public void start(Stage stage)  {
 
-        char[][] startArray = new char[8][8];
+        char[][] startArray = new char[150][200];
 
         int sizex = startArray[0].length;
         int sizey = startArray.length;
@@ -25,9 +26,9 @@ public class MatrixSequenceViewer extends Application {
                 startArray[y][x] = ' ';
             }
         }
-        MatrixSource theGame = new ExampleMatrixSource(startArray);
+//        MatrixSource theGame = new ExampleMatrixSource(startArray);
         // to use your solution for 'game of live' or 'Langton's Ant'
-        //MatrixSource theGame = new GameOfLive(startArray,true);
+        MatrixSource theGame = new GameOfLife(startArray,true);
         //MatrixSource theGame = new LangtonsAnt(startArray,true);
 
         paneSource = new MatrixPaneConverter(theGame);

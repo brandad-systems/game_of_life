@@ -1,13 +1,31 @@
 package de.bas.game_of_life;
 
+import de.bas.tdd_helpers.MatrixSource;
+
 import java.util.Arrays;
 import java.util.Random;
 
 import static de.bas.tdd_helpers.MatrixPaneConverter.DEAD_CELL;
 import static de.bas.tdd_helpers.MatrixPaneConverter.LIVING_CELL;
 
-public class GameOfLife {
+public class GameOfLife implements MatrixSource {
     char[][] board;
+
+    @Override
+    public int getSizeX() {
+        return board[0].length;
+    }
+
+    @Override
+    public int getSizeY() {
+        return board.length;
+    }
+
+    @Override
+    public char[][] getNextMatrix() {
+        calculateNewGeneration();
+        return board;
+    }
 
     private boolean isValid(char[][] board, boolean randomInit){
         if (board == null){
@@ -26,28 +44,28 @@ public class GameOfLife {
         return true;
     }
 
-    public GameOfLife(char[][] board) {
-        if(!isValid(board, false)){
+    public GameOfLife(char[][] initBoard) {
+        if(!isValid(initBoard, false)){
             throw new IllegalArgumentException();
         }
-        this.board = Arrays.stream(board)
+        this.board = Arrays.stream(initBoard)
                 .map(char[]::clone)
                 .toArray((char[][]::new));
     }
 
-    public GameOfLife(char[][] board, boolean randomInit) {
-        if(!isValid(board, randomInit)){
+    public GameOfLife(char[][] initBoard, boolean randomInit) {
+        if(!isValid(initBoard, randomInit)){
             throw new IllegalArgumentException();
         }
-        this.board = Arrays.stream(board)
+        this.board = Arrays.stream(initBoard)
                 .map(char[]::clone)
                 .toArray((char[][]::new));
 
 
         if(randomInit) {
             var random = new Random();
-            for (int x = 0; x < board[0].length; x++) {
-                for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < getSizeX(); x++) {
+                for (int y = 0; y < getSizeY(); y++) {
                     this.board[y][x] = random.nextBoolean() ? LIVING_CELL : DEAD_CELL;
                 }
             }
@@ -55,9 +73,9 @@ public class GameOfLife {
     }
 
     void calculateNewGeneration(){
-        var newBoard = new char[board.length][board[0].length];
-        for (int x = 0; x < board[0].length; x++) {
-            for (int y = 0; y < board.length; y++) {
+        var newBoard = new char[getSizeY()][getSizeX()];
+        for (int x = 0; x < getSizeX(); x++) {
+            for (int y = 0; y < getSizeY(); y++) {
                 newBoard[y][x] = calculateNextGenerationCellState(x, y);
             }
         }
@@ -77,7 +95,7 @@ public class GameOfLife {
     }
 
     boolean isAlive(int x, int y) {
-        if (board == null || x < 0 || y < 0 || y >= board.length || x >= board[0].length) {
+        if (board == null || x < 0 || y < 0 || y >= getSizeY() || x >= getSizeX()) {
             return false;
         }
         return returnState(x,y) == LIVING_CELL;
