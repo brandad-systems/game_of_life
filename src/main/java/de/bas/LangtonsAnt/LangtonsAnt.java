@@ -4,9 +4,9 @@ import de.bas.tdd_helpers.MatrixPaneConverter;
 
 public class LangtonsAnt {
 
-
     private char[][] board;
     private Direction currentDirection;
+    private char currentCellColor;
 
     LangtonsAnt(char[][] board, int antX, int antY, Direction antDirection) {
         //...if randomInit is true then  array content (but not  array.size), antX, etc. are ignored and generated as valid random values,
@@ -16,8 +16,10 @@ public class LangtonsAnt {
 
     // gives back color of the current cell where the ant is.
     public char getCurrentCellColor(int x, int y) {
-        return board[x][y];
+        this.currentCellColor = board[x][y];
+        return currentCellColor;
     }
+
 
     // gets the current direction of the ant
     public Direction getCurrentDirection() {
@@ -26,26 +28,46 @@ public class LangtonsAnt {
 
     public void setNewDirection(int x, int y) {
 
-        char currentColor = getCurrentCellColor(x, y);
+        var currentCellColor = getCurrentCellColor(x, y);
 
-        if (currentColor == MatrixPaneConverter.WHITE_CELL) {
-           /* if (currentDirection.getValue() == 3) {
-                currentDirection = Direction.NORTH;
-            }
-            currentDirection = Direction.get(currentDirection.getValue() + 1);*/
+        if (currentCellColor == MatrixPaneConverter.WHITE_CELL) {
+            currentDirection = (currentDirection.getValue() == 3) ? Direction.NORTH :
+                    Direction.get(currentDirection.getValue() + 1);
         }
 
-        /*if (currentColor == MatrixPaneConverter.BLACK_CELL) {
-            if (currentDirection.getValue() == 0) {
-                currentDirection = Direction.WEST;
-            }
-            currentDirection = Direction.get(currentDirection.getValue() - 1);
-        }*/
-
-        currentDirection = Direction.NORTH;
+        if (currentCellColor == MatrixPaneConverter.BLACK_CELL) {
+            currentDirection = (currentDirection.getValue() == 0) ? Direction.WEST :
+                    Direction.get(currentDirection.getValue() - 1);
+        }
     }
 
+
     // rotate the ant based on cell color and current direction
+
+
+
+
+    // flip color of current cell
+
+
+    public void setNewCellColor(int x, int y) {
+
+        var currentCellColor = getCurrentCellColor(x, y);
+
+        board[x][y] = (currentCellColor == MatrixPaneConverter.WHITE_CELL)? MatrixPaneConverter.BLACK_CELL:MatrixPaneConverter.WHITE_CELL;
+
+    }
+
+    public void moveAnt(int x, int y) {
+
+        var currentCellColor = getCurrentCellColor(x,y);
+        var currentDirection = getCurrentDirection();
+
+    }
+
+    // move the ant based on current direction and next direction
+
+
 
     public enum Direction {
         NORTH(0),
@@ -69,8 +91,5 @@ public class LangtonsAnt {
 
 
     }
-    // flip color of current cell
-
-    // move the ant based on current direction and next direction
 
 }
